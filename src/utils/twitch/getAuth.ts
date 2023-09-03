@@ -6,13 +6,15 @@ function getAuth(clientID: string, clientSecret: string): Promise<string> {
 
         request.post(tokenUrl, (error, res, body) => {
             if (error) {
-                console.error(`Error making Twitch API request: ${error}`);
+                console.error(
+                    `Error making Twitch API request for Auth: ${error}`
+                );
                 return reject(error);
             }
 
             if (res.statusCode !== 200) {
                 console.error(
-                    `Twitch API returned status code ${res.statusCode}`
+                    `Twitch API[Auth] returned status code ${res.statusCode}`
                 );
                 return reject(
                     `Twitch API request failed with status code ${res.statusCode}`
@@ -29,7 +31,7 @@ function getAuth(clientID: string, clientSecret: string): Promise<string> {
                     );
                 }
             } catch (e) {
-                console.error(`Error parsing Twitch API response: ${e}`);
+                console.error(`Error parsing Twitch API[Auth] response: ${e}`);
                 reject(e);
             }
         });
